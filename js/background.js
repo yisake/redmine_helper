@@ -107,7 +107,6 @@ $(document).ready(function() {
 	        	$.ajax({
 	    			url:"http://127.0.0.1:5000/createIssue",
 	    			type:"POST", 
-	    			alocal: false,
 	    			dataType:"json",
 	    			data:{
 	    				"login":login,
@@ -128,17 +127,15 @@ $(document).ready(function() {
 	                },
 	    		    success: function (data, textStatus, xhr) {
 	    		    	$('#fakeloader5').css('display','none')
-	    		    	document.getElementById('warn1').style.display='block';
 	    		    	//问题提交成功后相关信息的销毁和重置
 	    		    	localStorage.removeItem("lastuser");
 	    		    	localStorage.setItem("lastuser",assigneeid);
 	    		    	localStorage.removeItem("lastproject");
 	    		    	localStorage.setItem("lastproject",projectid);
-	    		    	if(data=="success"){
-	    		    		console.log("提交bug成功~");
-	    		    		window.close();
+	    		    	if(data.result=="success"){
+	    		    		ShowSuccess("提交bug成功");
 	    		    	}else{
-	    		    		console.log("提交bug失败");
+	    		    		ShowDanger("提交bug失败");
 	    		    	}
 	    			},
 	    			error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -148,14 +145,14 @@ $(document).ready(function() {
 	    		    	localStorage.removeItem("lastproject");
 	    		    	localStorage.setItem("lastproject",projectid);
 	    				
-	    		    	console.log("提交bug 请求发生错误")
+	    		    	ShowDanger("提交bug 请求发生错误")
 	    		    	console.log(XMLHttpRequest);
 	    				console.log(errorThrown);
 	    			},
 	        	});
 	       	},  
 	        error: function (XMLHttpRequest, textStatus, errorThrown){
-	        console.log("上传附件失败");
+	        ShowDanger("上传附件失败");
 			console.log(XMLHttpRequest);
 			console.log(errorThrown);
 	        },
@@ -174,3 +171,32 @@ function getQueryString(name) {
 	}
 	return null; 
 };
+
+//tip是提示信息，type:'success'是成功信息，'danger'是失败信息,'info'是普通信息
+function ShowTip(tip, type) {
+    var $tip = $('#tip');
+    if ($tip.length == 0) {
+        $tip = $('<span id="tip" style="font-weight:bold;position:absolute;top:50px;left: 50%;z-index:9999"></span>');
+        $('body').append($tip);
+    }
+    $tip.stop(true).attr('class', 'alert alert-' + type).text(tip).css('margin-left', -$tip.outerWidth() / 2).fadeIn(500).delay(1000).fadeOut(500);
+}
+
+function ShowMsg(msg) {
+    ShowTip(msg, 'info');
+}
+
+function ShowSuccess(msg) {
+    ShowTip(msg, 'success');
+}
+
+function ShowDanger(msg) {
+    ShowTip(msg, 'danger');
+}
+
+function ShowWarn(msg,$focus, clear) {
+    ShowTip(msg, 'warning');
+    if ($focus) $focus.focus();
+    if (clear) $focus.val('');
+    return false;
+}

@@ -10,8 +10,6 @@ if ((typeof FaplCanvasTools) === 'undefined') {
  * 
  * 
  */
-
-var weight=5;
 // -------------------------------------------------------------------------------------
 // FaplCanvasTools.pencil 
 // this is use for usual pen writing procedure 
@@ -62,6 +60,7 @@ FaplCanvasTools.erase = function(canvas, tempCanvas, paintImage){
 	var context = canvas.getContext("2d");
 	var tool = this;
     this.started = false;
+    console.dir(this)
     // This is called when you start holding down the mouse button.
     // This starts the pencil drawing.
     this.mousedown = function (ev) {
@@ -316,7 +315,7 @@ FaplCanvasTools.rectangle = function(canvas, tempCanvas, paintImage){
 FaplCanvasTools.arrow = function(canvas, tempCanvas, paintImage){
 	var tempContext = tempCanvas.getContext("2d");
     tempContext.lineWidth = $('#selWidth').val();
-    tempContext.strokeStyle = $('#selColor').val();		
+    tempContext.strokeStyle = $('#selColor').val();
 	var tool = this;
     this.started = false;
 
@@ -390,8 +389,10 @@ FaplCanvasTools.arrow = function(canvas, tempCanvas, paintImage){
 // FaplCanvasTools.font 
 // this is use for font related matter
 // -------------------------------------------------------------------------------------
-FaplCanvasTools.font = function(){
-  var tool = this;
+var fontEl;
+FaplCanvasTools.font = function(canvas, tempCanvas, paintImage){
+	var tempContext = tempCanvas.getContext("2d");
+	var tool = this;
     this.started = false;
 
     this.mousedown = function (ev) {
@@ -399,7 +400,7 @@ FaplCanvasTools.font = function(){
       tool.x0 = ev._x;
       tool.y0 = ev._y;
       // get the selected font by coordinate??
-      var fontEl = $('<a/>',{
+       fontEl = $('<a/>',{
               class : '.font-draggable',
               text : 'Enter Text',
               /**
@@ -408,12 +409,10 @@ FaplCanvasTools.font = function(){
               href : 'javascript:void(0)',
                */
               style : 'position:absolute;',
-
             });
       $(fontEl).css('top',ev._y);
       $(fontEl).css('left',ev._x);
       $(fontEl).attr('data-original-title','Enter comments');
-      
 
       $('#font-container').append(fontEl);
      
@@ -424,19 +423,21 @@ FaplCanvasTools.font = function(){
             inputclass : 'input-xlarge',
             placement :'right',
             success: function(response, newValue) {
-              if(newValue === '')
-                $(this).remove();
+            	console.log('############')
+            	if(newValue === '')
+            		$(this).remove();
+            	//根据其他方法添加字体输入到canvas画布中。。。
+            	tempContext.fillStyle="#0088cc";
+            	tempContext.textBaseline = 'top';//对齐方式
+            	tempContext.font="20px Arial";
+            	
+            	console.log(fontEl.css('left'));
+            	tempContext.fillText(newValue,parseInt(fontEl.css('left'))-21, parseInt(fontEl.css('top'))-30);
+            	paintImage(canvas,tempCanvas);
             }
-
           });
     };
-
 };
-
-
-
-
-
 
 
 

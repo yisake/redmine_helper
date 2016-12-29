@@ -307,35 +307,33 @@ $('#sub').click(function(){
         chrome.tabs.captureVisibleTab(function(screenshotUrl) {
             //构建上传的formdata
             $("#registerForm").attr("enctype","multipart/form-data");
+    	    //正则匹配替换掉前面的字符
+    	    var Pic = screenshotUrl.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+    	  //构建上传的formdata
             var formData = new FormData($("#registerForm")[0]);
-            formData.append("imgBase64",encodeURIComponent(screenshotUrl));//
+            formData.append("imgBase64",encodeURIComponent(Pic));//
             formData.append("fileFileName","photo.jpg");
             formData.append("login",localStorage.getItem("redmineusername"));
             formData.append("password",localStorage.getItem("redminepassword"));
             //上传 自动截图
             $.ajax({  
-                url: "http://10.12.21.161:8080/AutoTest/chrome/capture",
+                url: "http://127.0.0.1:5000/upload",
                 type: 'POST',  
                 data: formData,  
                 timeout : 10000, //超时时间设置，单位毫秒
-                async: true,  
                 cache: false,  
                 contentType: false,  
                 processData: false, 
                 success: function (data, textStatus, xhr) {
-                    //返回值获取 附件token
-                    attachlist=data.substring(1,data.length-1);
                     //问题提交
                     $.ajax({
-                        url:"http://10.12.21.161:8080/AutoTest/chrome/newissue",
+                        url:"http://127.0.0.1:5000/createIssue",
                         type:"POST", 
-                        async: false,
                         dataType:"json",
                         data:{
                             "login":login,
                             "password":password,
                             "projectid":projectid,
-                            "projectname":projectname,
                             "track":track,
                             "subject":subject,
                             "description":description,
@@ -345,8 +343,6 @@ $('#sub').click(function(){
                             "type":type,
                             "environment":environment,
                             "assigneeid":assigneeid,
-                            "assigneename":assigneename,
-                            "attachlist":attachlist
                         },
                         success: function (data, textStatus, xhr) {
                             //问题提交成功后相关信息的销毁和重置
@@ -355,7 +351,7 @@ $('#sub').click(function(){
                             localStorage.setItem("lastuser",document.getElementById("questionfor").value);
                             localStorage.removeItem("lastproject");
                             localStorage.setItem("lastproject",document.getElementById("project").value);
-                            if(data=="success"){
+                            if(data.result=="success"){
                                 $.jGrowl("BUG提交成功~", { header: 'Operating Result' });	
                             }else{
                                 $.jGrowl("BUG提交失败！", { header: 'Operating Result' });
@@ -391,8 +387,7 @@ $('#sub').click(function(){
             			 "&subject="+subject+"&description="+description+"&priority="+priority+"&severity="+severity+"&reappear="+reappear+
             			 "&type="+type+"&environment="+environment+"&assigneeid="+assigneeid+"&assigneename="+assigneename+
             			 "&img="+screenshotUrl, "BUG提交插件-截图编辑", 'height=' + iHeight + ',width=' + iWidth + ',top=' + iTop + ',left=' + iLeft +',edge=raised, center=yes, help=no,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no,status=no')
-        		})
-
+        		});
     	} else{
             //上传附件或者无附件方式的问题提交
             $.ajax({

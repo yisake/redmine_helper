@@ -1,65 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Canvas Draw Undo Redo Tryout Test</title>
-        <!-- Bootstrap -->
-        <link href="/css/bootstrap2canvas.css" rel="stylesheet" media="screen">
-        <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
-        <link href="/css/fakeLoader.css" rel="stylesheet" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Canvas Draw Undo Redo Tryout Test</title>
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap2canvas.css" rel="stylesheet" media="screen">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    <link href="/css/fakeLoader.css" rel="stylesheet" >
 
-        <script src="/js/jquery1.8.3.js"></script>
-        <script src="/js/jquery-ui-1.10.2.custom.min.js"></script>
-        <script src="/js/bootstrap2forcanvas.js"></script>
-        <script src="/js/bootstrap-editable.js"></script>
-        <script src="/js/fapl-canvas.js"></script>
-    
-        <style type="text/css">
-            #canvas-container { position: relative;}
-            #canvasView { border: 1px solid #000; }
-            #canvasTemp { position: absolute; top: 1px; left: 1px; }
-        </style>        
-    </head>
+    <script src="/js/jquery1.8.3.js"></script>
+    <script src="/js/jquery-ui-1.10.2.custom.min.js"></script>
+    <script src="/js/bootstrap2forcanvas.js"></script>
+    <script src="/js/bootstrap-editable.js"></script>
+    <script src="/js/fapl-canvas.js"></script>
+
+    <style type="text/css">
+        #canvas-container { position: relative;}
+        #canvasView { border: 1px solid #000; }
+        #canvasTemp { position: absolute; top: 1px; left: 1px; }
+    </style>        
+</head>
     
 <body>
-
 <!--div id="fakeloader" class="fakeloader"></div-->
 <div id="fakeloader1" class="fakeloader" style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; z-index: 999; display: none; background-color: rgb(231, 76, 60);"><div class="fl spinner2" style="position: absolute; left: 754px; top: 324.5px;"><div class="spinner-container container1"><div class="circle1"></div><div class="circle2"></div><div class="circle3"></div><div class="circle4"></div></div><div class="spinner-container container2"><div class="circle1"></div><div class="circle2"></div><div class="circle3"></div><div class="circle4"></div></div><div class="spinner-container container3"><div class="circle1"></div><div class="circle2"></div><div class="circle3"></div><div class="circle4"></div></div></div></div>
 <div id="fakeloader5" class="fakeloader" style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; z-index: 999; display: none; background-color: rgb(52, 73, 94);"><div class="fl spinner3" style="position: absolute; left: 762.5px; top: 324.5px;"><div class="dot1"></div><div class="dot2"></div></div></div>
 
-<!-- bootstrap¾¯¸æ -->
-<div class="alert alert-success" id="warn1"  style="display:none">
-    <button type="button" class="close" data-dismiss="alert"
-            aria-hidden="true">
-        &times;
-    </button>
-³É¹¦£¡ºÜºÃµØÍê³ÉÁËÌá½»¡£</div>
-<div class="alert alert-info" id="warn2" style="display:none">
-    <button type="button" class="close" data-dismiss="alert"
-            aria-hidden="true">
-        &times;
-    </button>
-ĞÅÏ¢£¡Çë×¢ÒâÕâ¸öĞÅÏ¢¡£</div>
-<div class="alert alert-warning" id="warn3" style="display:none">
-    <button type="button" class="close" data-dismiss="alert"
-            aria-hidden="true">
-        &times;
-    </button>
-¾¯¸æ£¡Çë²»ÒªÌá½»¡£</div>
-<div class="alert alert-danger" id="warn4" style="display:none">
-    <button type="button" class="close" data-dismiss="alert"
-            aria-hidden="true">
-        &times;
-    </button>
-´íÎó£¡Çë½øĞĞÒ»Ğ©¸ü¸Ä¡£</div>
+<!-- bootstrapè­¦å‘Š -->
+<div class="alert alert-success" id="warn1"  style="display:none">æˆåŠŸï¼å¾ˆå¥½åœ°å®Œæˆäº†æäº¤ã€‚</div>
+<div class="alert alert-info" id="warn2" style="display:none">ä¿¡æ¯ï¼è¯·æ³¨æ„è¿™ä¸ªä¿¡æ¯ã€‚</div>
+<div class="alert alert-warning" id="warn3" style="display:none">è­¦å‘Šï¼è¯·ä¸è¦æäº¤ã€‚</div>
+<div class="alert alert-danger" id="warn4" style="display:none">é”™è¯¯ï¼è¯·è¿›è¡Œä¸€äº›æ›´æ”¹ã€‚</div>
 
-<!-- bootstrapÌáÊ¾¿ò -->
+<!-- bootstrapæç¤ºæ¡† -->
 <div id="myAlert1" class="alert alert-success" style="display:none;">
     <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <strong>³É¹¦£¡</strong>½á¹ûÊÇ³É¹¦µÄ¡£
+    <strong>æˆåŠŸï¼</strong>ç»“æœæ˜¯æˆåŠŸçš„ã€‚
 </div>
 <div id="myAlert2" class="alert alert-warning" style="display:none;">
     <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <strong>¾¯¸æ£¡</strong>ÄúµÄÍøÂçÁ¬½ÓÓĞÎÊÌâ¡£
+    <strong>è­¦å‘Šï¼</strong>æ‚¨çš„ç½‘ç»œè¿æ¥æœ‰é—®é¢˜ã€‚
 </div>    
     
 <div class="container-fluid">
@@ -79,7 +59,7 @@
                 <a class="btn btn-danger canvas-helper"  data-toggle='redo'>Redo</a>
                 <a class="btn btn-danger canvas-helper"  data-toggle='sumbit' id='submit'>Sumbit</a>
                 
-                Line width : <select id="selWidth" style="width:60px ; ">
+                Line width : <select id="selWidth" style="width:52px ; ">
                         <option value="1">1</option>
                         <option value="3">3</option>
                         <option value="5">5</option>
@@ -111,6 +91,6 @@
     </div>
 </div>
 <script src="/js/fakeLoader.min.js"></script>
-<script src="/js/background.js"></script>
+<script src="/js/background.js" charset="utf-8"></script>
 </body>
 </html>

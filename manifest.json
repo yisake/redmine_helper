@@ -35,6 +35,9 @@
   // 应用协议页面
   "permissions": [
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+     "tabs",
+     "activeTab",
+     "storage"    
   ]
 }

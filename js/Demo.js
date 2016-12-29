@@ -380,7 +380,20 @@ $('#sub').click(function(){
                 }
             });
         });
-        }else{
+        }else if(document.getElementById("capture").value=="截图并编辑"){
+            var iHeight = "500";
+            var iWidth="700";
+            var iTop = (window.screen.availHeight - 30 - iHeight) / 2;    //获得窗口的垂直位置;  
+            var iLeft = (window.screen.availWidth - 10 - iWidth) / 2;      //获得窗口的水平位置;  
+            chrome.tabs.captureVisibleTab(function(screenshotUrl) {
+            	console.dir(screenshotUrl);
+            	curPopupWindow = window.open("background.html?login="+login+"&password="+password+"&projectid="+projectid+"&projectname="+projectname+"&track="+track+
+            			 "&subject="+subject+"&description="+description+"&priority="+priority+"&severity="+severity+"&reappear="+reappear+
+            			 "&type="+type+"&environment="+environment+"&assigneeid="+assigneeid+"&assigneename="+assigneename+
+            			 "&img="+screenshotUrl, "BUG提交插件-截图编辑", 'height=' + iHeight + ',width=' + iWidth + ',top=' + iTop + ',left=' + iLeft +',edge=raised, center=yes, help=no,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no,status=no')
+        		})
+
+    	} else{
             //上传附件或者无附件方式的问题提交
             $.ajax({
                 url:"http://127.0.0.1:5000/createIssue",

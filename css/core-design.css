@@ -1,0 +1,277 @@
+/* 
+    Document   : core-design.css
+    Created on : Nov 23, 2012, 1:08:07 PM
+    Author     : robin.foe
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.container-fapl{
+    width:100%;
+}
+
+.background-white{
+    background-color: #FFFFFF;
+}
+
+
+
+.ul-list{
+    list-style-type: none;
+
+}
+
+.ul-list li p{
+    overflow: auto;
+}
+
+.ul-list li:first-child{
+    border-top-width: 1px;
+    border-top-color: #eee;
+    border-top-style: solid;
+}
+
+.ul-list li{
+    margin-left: -25px;
+    overflow: auto;
+    border-bottom-width: 1px;
+    border-bottom-color: #eee;
+    border-bottom-style: solid;
+    padding-top: 10px;
+}
+
+.ul-list .title-box{
+    
+    width: 500px;
+    margin: 15px 0;
+    margin-right: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: bold;
+    line-height: 20px;
+    color: inherit;
+    text-rendering: optimizelegibility;
+}
+
+.padding-top-10{
+    padding-top: 10px;
+}
+
+.side-menu-title{
+  font-family: inherit;
+  font-size: 11.9px;
+  font-weight: bold;
+  line-height: 20px;
+  color: inherit;
+  text-rendering: optimizelegibility;
+}
+
+
+.modal-header-title{
+  font-family: inherit;
+  font-size: 24.5px;
+  font-weight: bold;
+  line-height: 20px;
+  color: inherit;
+  text-rendering: optimizelegibility;
+}
+
+
+
+.remove-margin{
+	margin: 0 0 !important;
+}
+
+.remove-padding{
+	padding: 0 0 0 0 !important;
+}
+
+.remove-padding td{
+	padding: 3px !important;
+	font-size: 85% !important;
+}
+
+.border-tab{
+	border-left-width: 1px !important;
+    border-left-color: #000000 !important;
+    border-left-style: solid !important;
+}
+
+
+
+
+.force-text-align-left{
+	text-align : left !important;
+}
+	
+.force-margin-left{
+	margin-left: -15px !important;
+}	
+
+.force-padding-left-push{
+	padding-left: 15px !important;
+}	
+
+.force-border{
+	border-right-width: 1px !important;
+    border-right-color: #FFFFFF !important;
+    border-right-style: solid !important;
+	
+	border-top-width: 1px !important;
+    border-top-color: #FFFFFF !important;
+    border-top-style: solid !important;
+	
+	border-bottom-width: 1px !important;
+    border-bottom-color: #FFFFFF !important;
+    border-bottom-style: solid !important;
+}
+
+.cursor-pointer{
+	cursor: pointer;
+}
+
+/*diet tag*/
+.diet-tag-low-residue {
+  background-color: #ECD672;
+}
+
+.no-content{
+	content :"" !important;
+}
+
+.no-content:after{
+	content :"" !important;
+}
+
+.diet-tag-low-residue:after {
+  content: " Low Residue";
+}
+
+.diet-tag-low-residue[href]{
+  background-color: #ECD672;
+}
+
+.diet-tag-low-microbial {
+  background-color: #E55B3C;
+}
+
+.diet-tag-low-microbial:after {
+  content: " Low Microbial";
+}
+
+.diet-tag-low-reducing {
+  background-color: #EE9A4D;
+}
+.diet-tag-low-reducing:after {
+  content: " Reducing";
+}
+
+.diet-tag-low-fat {
+  background-color: #8A4117;
+}
+.diet-tag-low-fat:after {
+  content: " Low Fat";
+}
+
+.diet-tag-low-fibre {
+  background-color: #827B60;
+}
+.diet-tag-low-fibre:after {
+  content: " Low Fibre";
+}
+
+.diet-tag-low-protein {
+  background-color: #4E9258;
+}
+.diet-tag-low-protein:after {
+  content: " Low Protein";
+}
+
+.diet-tag-low-cholesterol {
+  background-color: #FBB117;
+}
+.diet-tag-low-cholesterol:after {
+  content: " Low Cholesterol";
+}
+
+.diet-tag-low-phosphate {
+  background-color: #6698FF;
+}
+.diet-tag-low-phosphate:after {
+  content: " Low Phosphate";
+}
+
+.diet-tag-low-purine {
+  background-color: #80C48A;
+}
+.diet-tag-low-purine:after {
+  content: " Low Purine";
+}
+
+.diet-tag-low-salt {
+  background-color: #1C6026;
+}
+.diet-tag-low-salt:after {
+  content: " Low Salt";
+}
+
+
+.diet-tag-low-potassium {
+  background-color: #95B9C7;
+}
+.diet-tag-low-potassium:after {
+  content: " Low Potassium";
+}
+
+.diet-tag-diabetic {
+  background-color: #FDD017;
+}
+.diet-tag-diabetic:after {
+  content: " Diabetic";
+}
+
+.diet-tag-vma {
+  background-color: #AF7817;
+}
+.diet-tag-vma:after {
+  content: " VMA";
+}
+
+.custom-icon-glass-water{
+	display: inline-block;
+	width:24px;
+	height:24px;
+  margin-top: 1px;
+  line-height: 24px;
+  *margin-right: .3em;
+  padding-left:5px;
+  vertical-align: text-top;
+  
+  background-image: url("../img/glass-water-24x24.png");
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  
+  /*
+  display: inline-block;
+	width:16px;
+	height:16px;
+  margin-top: 1px;
+  line-height: 16px;
+  *margin-right: .3em;
+  padding-left:5px;
+  vertical-align: text-top;
+  
+  background-image: url("../img/glass-water.png");
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  */
+}
+
+.font-draggable{
+  position:absolute !important;
+  z-index:10;
+}
+
+
+
+

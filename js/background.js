@@ -35,7 +35,7 @@ jQuery(document).ready(function($){
         }else{
             $ele.attr('disabled',false);
         }
-    }
+    };
     
     FaplCanvas.prototype.redoListener = function(){
         var $ele = $("[data-toggle='redo'].canvas-helper");
@@ -44,7 +44,7 @@ jQuery(document).ready(function($){
         }else{
             $ele.attr('disabled',false);
         }
-    }
+    };
     
     // trigger at beginning
     x.undoListener();
@@ -80,7 +80,7 @@ $(document).ready(function() {
 		var canvas = $("#canvasView")[0];
 	    var screenshotUrl=canvas.toDataURL("image/jpeg", 1.0);
 	    //正则匹配替换掉前面的字符
-	    var Pic = screenshotUrl.replace(/^data:image\/(png|jpg|jpeg);base64,/, "")
+	    var Pic = screenshotUrl.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
 	    //console.log(Pic)
 	    //构建上传的formdata
 		$("#registerForm").attr("enctype","multipart/form-data");
@@ -100,7 +100,7 @@ $(document).ready(function() {
 	        contentType: false,  
 	        processData: false, 
             beforeSend:function(){
-                $('#fakeloader5').css('display','block')
+                $('#fakeloader5').css('display','block');
             },
 	        success: function (data, textStatus, xhr) {
 	        	//问题提交

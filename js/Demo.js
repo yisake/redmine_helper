@@ -59,7 +59,7 @@ $(document).ready(function() {
                     localStorage.setItem("redminepassword",document.getElementById("password").value);
                     console.log(map)
                     localStorage.setItem("projectmap",map.valuetoString());
-                    localStorage.setItem("projectview",document.getElementsByClassName("multiselect")[0].getAttribute("title"));
+                    //localStorage.setItem("projectview",document.getElementsByClassName("multiselect")[0].getAttribute("title"));
                     //根据选择的常用项目 修改问题信息中项目选择列表  并选择最后一次选择的项目作为默认值
                     $('#project').html("");
                      var lastproject=localStorage.getItem("lastproject");
@@ -377,8 +377,8 @@ $('#sub').click(function(){
             });
         });
         }else if(document.getElementById("capture").value=="截图并编辑"){
-            var iHeight = "500";
-            var iWidth="700";
+            var iHeight = "600";
+            var iWidth="800";
             var iTop = (window.screen.availHeight - 30 - iHeight) / 2;    //获得窗口的垂直位置;  
             var iLeft = (window.screen.availWidth - 10 - iWidth) / 2;      //获得窗口的水平位置;  
             chrome.tabs.captureVisibleTab(function(screenshotUrl) {
@@ -585,66 +585,64 @@ $('#saveconfig').click(function(){
 
 function Map(){
     this.container = new Object();
-    }
+};
 
 
-    Map.prototype.put = function(key, value){
+Map.prototype.put = function(key, value){
     this.container[key] = value;
-    }
+};
+
+Map.prototype.get = function(key){
+return this.container[key];
+}
+
+Map.prototype.keySet = function() {
+var keyset = new Array();
+var count = 0;
+for (var key in this.container) {
+// 跳过object的extend函数
+if (key == 'extend') {
+continue;
+}
+keyset[count] = key;
+count++;
+}
+return keyset;
+}
 
 
-    Map.prototype.get = function(key){
-    return this.container[key];
-    }
+Map.prototype.size = function() {
+var count = 0;
+for (var key in this.container) {
+// 跳过object的extend函数
+if (key == 'extend'){
+continue;
+}
+count++;
+}
+return count;
+}
 
 
-    Map.prototype.keySet = function() {
-    var keyset = new Array();
-    var count = 0;
-    for (var key in this.container) {
-    // 跳过object的extend函数
-    if (key == 'extend') {
-    continue;
-    }
-    keyset[count] = key;
-    count++;
-    }
-    return keyset;
-    }
+Map.prototype.remove = function(key) {
+delete this.container[key];
+}
 
-
-    Map.prototype.size = function() {
-    var count = 0;
-    for (var key in this.container) {
-    // 跳过object的extend函数
-    if (key == 'extend'){
-    continue;
-    }
-    count++;
-    }
-    return count;
-    }
-
-
-    Map.prototype.remove = function(key) {
-    delete this.container[key];
-    }
-    
-    Map.prototype.valuetoString = function(){
-        var str = "";
-        for (var i = 0, keys = this.keySet(), len = keys.length; i< len; i++) {
-            str = str + keys[i] + "," + this.container[keys[i]] + ";";
-        }
-        if(str!=""){
-            str=str.substring(0,str.length-1);
-        }
-        return str;
-        }
-
-    Map.prototype.toString = function(){
+Map.prototype.valuetoString = function(){
     var str = "";
     for (var i = 0, keys = this.keySet(), len = keys.length; i< len; i++) {
-    str = str + keys[i] + "=" + this.container[keys[i]] + ";\n";
+        str = str + keys[i] + "," + this.container[keys[i]] + ";";
+    }
+    if(str!=""){
+        str=str.substring(0,str.length-1);
     }
     return str;
     }
+
+Map.prototype.toString = function(){
+var str = "";
+for (var i = 0, keys = this.keySet(), len = keys.length; i< len; i++) {
+str = str + keys[i] + "=" + this.container[keys[i]] + ";\n";
+}
+return str;
+}
